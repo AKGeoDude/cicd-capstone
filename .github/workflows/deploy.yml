@@ -10,7 +10,7 @@ jobs:
     outputs:
       artifact: ${{ steps.build.outputs.tarball }}        # exposed to downstream jobs
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - id: build                                          # gives this step an addressable name
         run: ./scripts/build.sh                            # the script writes "tarball=..." to $GITHUB_OUTPUT
       - uses: actions/upload-artifact@v4
