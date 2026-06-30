@@ -2,6 +2,6 @@
 
 mkdir -p dist
 
-tar -czf dist/release.tgz src/
+tar -czf dist/release.tgz /
 
 echo "tarball=dist/release.tgz" >> "$GITHUB_OUTPUT"
