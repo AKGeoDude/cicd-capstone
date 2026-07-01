@@ -26,7 +26,8 @@ jobs:
       - uses: actions/download-artifact@v6
         with:
           name: pipeline-bundle
-      - run: ./fake_deploy.sh dev
+      - uses: actions/checkout@v7
+      - run: ./scripts/fake_deploy.sh dev
 
   deploy-test:
     needs: deploy-dev
