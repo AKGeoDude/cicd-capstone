@@ -37,6 +37,7 @@ jobs:
       - uses: actions/download-artifact@v6
         with:
           name: pipeline-bundle
+      - uses: actions/checkout@v7
       - run: ./scripts/fake_deploy.sh test
 
   deploy-prod:
@@ -47,4 +48,5 @@ jobs:
       - uses: actions/download-artifact@v6
         with:
           name: pipeline-bundle
+      - uses: actions/checkout@v7
       - run: ./scripts/fake_deploy.sh prod
