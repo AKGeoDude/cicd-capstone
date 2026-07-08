@@ -38,10 +38,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v8
-        with:
-          name: pipeline-bundle
-      - uses: actions/checkout@v7
-      - run: ./scripts/fake_deploy.sh test
+        with: { name: pipeline-bundle, path: dist }
+      - run: ./dist/scripts/fake_deploy.sh test
 
   deploy-prod:
     needs: deploy-test
@@ -49,7 +47,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v8
-        with:
-          name: pipeline-bundle
-      - uses: actions/checkout@v7
-      - run: ./scripts/fake_deploy.sh prod
+        with: { name: pipeline-bundle, path: dist }
+      - run: ./dist/scripts/fake_deploy.sh prod
