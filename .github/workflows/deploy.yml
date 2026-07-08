@@ -16,7 +16,6 @@ jobs:
       - name: Package release bundle
         run: |
           mkdir -p dist
-          cp -r build_output dist/
           cp -r scripts dist/
       - uses: actions/upload-artifact@v6
         with:
