@@ -17,10 +17,10 @@ jobs:
         run: |
           mkdir -p dist
           cp -r scripts dist/
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@v6
         with:
+          name: pipeline-bundle
           path: ./dist
-          archive: false # won't zip the files, preserving permissions so future steps can execute the scripts
 
   deploy-dev:
     needs: build
@@ -28,7 +28,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v8
-        with: { path: dist }
+        with: { name: pipeline-bundle, path: dist }
+      - run: ls -l dist/scripts # debugging step
       - run: ./dist/scripts/fake_deploy.sh dev
 
   deploy-test:
@@ -37,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v8
-        with: { path: dist }
+        with: { name: pipeline-bundle, path: dist }
       - run: ./dist/scripts/fake_deploy.sh test
 
   deploy-prod:
@@ -46,5 +47,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v8
-        with: { path: dist }
+        with: { name: pipeline-bundle, path: dist }
       - run: ./dist/scripts/fake_deploy.sh prod
