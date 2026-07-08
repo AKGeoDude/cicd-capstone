@@ -29,6 +29,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v8
         with: { name: pipeline-bundle, path: dist }
+      - run: ls -l dist/scripts # debugging step
       - run: ./dist/scripts/fake_deploy.sh dev
 
   deploy-test:
