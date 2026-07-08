@@ -13,6 +13,11 @@ jobs:
       - uses: actions/checkout@v7
       - id: build                                          # gives this step an addressable name
         run: ./scripts/build.sh                            # the script writes "tarball=..." to $GITHUB_OUTPUT
+      - name: Package release bundle
+        run: |
+          mkdir -p dist
+          cp -r build_output dist/
+          cp -r scripts dist/
       - uses: actions/upload-artifact@v6
         with:
           name: pipeline-bundle
@@ -24,10 +29,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v8
-        with:
-          name: pipeline-bundle
-      - uses: actions/checkout@v7
-      - run: ./scripts/fake_deploy.sh dev
+        with: { name: pipeline-bundle, path: dist }
+      - run: ./dist/scripts/fake_deploy.sh dev
 
   deploy-test:
     needs: deploy-dev
