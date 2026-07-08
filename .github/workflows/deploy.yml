@@ -32,7 +32,7 @@ jobs:
       - run: |
           chmod +x dist/scripts/*.sh
           ./dist/scripts/fake_deploy.sh dev
-
+ 
   deploy-test:
     needs: deploy-dev
     environment: test
@@ -40,7 +40,9 @@ jobs:
     steps:
       - uses: actions/download-artifact@v8
         with: { name: pipeline-bundle, path: dist }
-      - run: ./dist/scripts/fake_deploy.sh test
+      - run: |
+          chmod +x dist/scripts/*.sh
+          ./dist/scripts/fake_deploy.sh test
 
   deploy-prod:
     needs: deploy-test
@@ -49,4 +51,6 @@ jobs:
     steps:
       - uses: actions/download-artifact@v8
         with: { name: pipeline-bundle, path: dist }
-      - run: ./dist/scripts/fake_deploy.sh prod
+      - run: |
+          chmod +x dist/scripts/*.sh
+          ./dist/scripts/fake_deploy.sh prod
