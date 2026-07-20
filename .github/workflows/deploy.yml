@@ -11,8 +11,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    outputs:
-      artifact: ${{ steps.build.outputs.tarball }}        # exposed to downstream jobs
     steps:
       - uses: actions/checkout@v7
       - id: build                                          # gives this step an addressable name
